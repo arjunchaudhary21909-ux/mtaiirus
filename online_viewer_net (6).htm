@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mtaiirus — Free Premium Courses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F2EB;
+  --bg2: #ECEAE2;
+  --ink: #1A1814;
+  --ink2: #6B6760;
+  --ink3: #B0ADA7;
+  --accent: #D4540E;
+  --accentl: #F0A87A;
+  --accentb: rgba(212,84,14,.08);
+  --green: #2D6A3F;
+  --greenl: #E4F0E8;
+  --blue: #1A4B8C;
+  --bluel: #E4EBF7;
+  --card: #FFFDFB;
+  --border: rgba(26,24,20,.1);
+  --borderh: rgba(26,24,20,.2);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+
+/* TEXTURE OVERLAY */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+/* HEADER */
+.hdr{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(245,242,235,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,60px);z-index:1000}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.blogo{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;background:#fff;border:1px solid var(--border)}
+.blogo img{width:38px;height:38px;object-fit:contain;display:block}
+.bname{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--ink);letter-spacing:1.5px}
+.bname span{color:var(--accent)}
+.nav{display:flex;align-items:center;gap:2px}
+.nav a{text-decoration:none;color:var(--ink2);font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;transition:all .2s}
+.nav a:hover{color:var(--ink);background:rgba(26,24,20,.06)}
+.nav .pill{background:var(--ink);color:var(--bg);border-radius:6px;font-weight:600}
+.nav .pill:hover{background:var(--accent);color:#fff}
+.ham{display:none;border:1px solid var(--border);background:none;border-radius:6px;padding:7px 10px;cursor:pointer;color:var(--ink2)}
+.drawer{display:none;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:rgba(245,242,235,.98);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 20px 16px;gap:2px;z-index:999}
+.drawer.open{display:flex}
+.drawer a{text-decoration:none;color:var(--ink2);font-size:15px;font-weight:500;padding:11px 14px;border-radius:8px;transition:all .2s}
+.drawer a:hover{color:var(--ink);background:rgba(26,24,20,.06)}
+
+/* HERO */
+.hero{padding:clamp(100px,14vw,160px) clamp(20px,5vw,60px) clamp(60px,8vw,100px);max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hleft{position:relative}
+.htag{display:inline-flex;align-items:center;gap:8px;background:var(--greenl);color:var(--green);font-size:11px;font-weight:600;padding:6px 14px;border-radius:100px;letter-spacing:.8px;margin-bottom:28px;text-transform:uppercase}
+.hpulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.6);opacity:.5}}
+h1{font-family:'Syne',sans-serif;font-size:clamp(48px,6vw,78px);font-weight:800;line-height:.95;letter-spacing:-2px;margin-bottom:24px;color:var(--ink)}
+h1 .cross{position:relative;display:inline-block}
+h1 .cross::after{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:3px;background:var(--accent);transform:translateY(-50%) rotate(-2deg)}
+h1 em{font-style:normal;color:var(--accent)}
+.hsub{font-size:16px;color:var(--ink2);line-height:1.75;max-width:400px;margin-bottom:36px;font-weight:400}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn-primary{background:var(--ink);color:var(--bg);border:none;border-radius:8px;padding:14px 28px;font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;letter-spacing:.1px}
+.btn-primary:hover{background:var(--accent);transform:translateY(-2px)}
+.btn-accent{background:var(--accentb);color:var(--accent);border:1.5px solid rgba(212,84,14,.25);border-radius:8px;padding:13px 28px;font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-accent:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink2);border:1px solid var(--border);border-radius:8px;padding:13px 22px;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-ghost:hover{border-color:var(--borderh);color:var(--ink);transform:translateY(-1px)}
+
+/* HERO RIGHT — VISUAL CARD */
+.hright{position:relative}
+.hcard-main{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:0 2px 0 var(--border),0 20px 60px rgba(26,24,20,.08)}
+.hcard-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.hcard-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.3px}
+.hcard-badge{background:var(--greenl);color:var(--green);font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;letter-spacing:.8px;text-transform:uppercase}
+.course-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.course-item:last-child{border-bottom:none;padding-bottom:0}
+.cico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+.cico.math{background:#FFF0E6}
+.cico.phy{background:#E8F0FF}
+.cico.chem{background:#EAFBF0}
+.cinfo{flex:1}
+.cname{font-weight:600;font-size:14px;color:var(--ink);margin-bottom:2px}
+.cmeta{font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:8px}
+.cfree{font-size:10px;font-weight:700;color:var(--green);background:var(--greenl);padding:3px 8px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
+
+/* floating chips */
+.fchip{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:11px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:7px;box-shadow:0 4px 16px rgba(26,24,20,.08);white-space:nowrap;animation:float 4s ease-in-out infinite}
+.fc1{top:-24px;right:30px;animation-delay:0s}
+.fc2{bottom:-20px;left:-10px;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.fcot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+
+/* STATS ROW */
+.statsrow{background:var(--ink);padding:clamp(28px,4vw,44px) clamp(20px,5vw,60px)}
+.statsinner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.sbox{text-align:center}
+.snum{font-family:'Syne',sans-serif;font-size:clamp(30px,4vw,48px);font-weight:800;color:var(--bg);line-height:1}
+.snum span{color:var(--accentl)}
+.slbl{font-size:11px;color:rgba(245,242,235,.45);text-transform:uppercase;letter-spacing:2px;margin-top:6px;font-weight:500}
+.sdiv{width:1px;height:40px;background:rgba(245,242,235,.1)}
+
+/* SECTION */
+.sec{padding:clamp(64px,8vw,104px) clamp(20px,5vw,60px);max-width:1200px;margin:0 auto}
+.slbl-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.slbl-line{width:24px;height:2px;background:var(--accent);border-radius:2px;flex-shrink:0}
+.slbl-txt{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2px}
+.stitle{font-family:'Syne',sans-serif;font-size:clamp(34px,5vw,58px);font-weight:800;line-height:1;letter-spacing:-1.5px;margin-bottom:12px;color:var(--ink)}
+.sdesc{font-size:15px;color:var(--ink2);line-height:1.8;max-width:480px}
+
+/* PLATFORMS */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.pcard{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:28px 24px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:18px;transition:all .3s;position:relative;overflow:hidden}
+.pcard::before{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.pcard:hover{transform:translateY(-8px);border-color:var(--borderh);box-shadow:0 24px 64px rgba(26,24,20,.12)}
+.pcard:hover::before{transform:scaleX(1)}
+.pc1::before{background:var(--accent)}
+.pc2::before{background:var(--blue)}
+.pc3::before{background:var(--green)}
+.pnum{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--ink3);letter-spacing:1px}
+.plogo-wrap{width:56px;height:56px;border-radius:12px;border:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff}
+.plogo-wrap img{width:100%;height:100%;object-fit:contain}
+.plogo-txt{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--ink)}
+.pname{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.3px}
+.pdesc{font-size:13px;color:var(--ink2);line-height:1.7;flex:1}
+.ptag{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;color:var(--accent);background:var(--accentb);border:1px solid rgba(212,84,14,.2);border-radius:100px;padding:5px 12px;width:fit-content;text-transform:uppercase;letter-spacing:.8px}
+.ptdot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+
+/* SUBJECTS */
+.sbg{background:var(--bg2)}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px}
+.scard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;text-decoration:none;color:inherit;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:10px}
+.scard:hover{transform:translateY(-4px);border-color:var(--borderh);box-shadow:0 12px 32px rgba(26,24,20,.08)}
+.sico{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:2px}
+.sn{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.2px}
+.sc{font-size:11px;color:var(--accent);font-weight:600;letter-spacing:.5px}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:50px;position:relative}
+.steps::before{content:"";position:absolute;top:20px;left:calc(12.5% + 10px);right:calc(12.5% + 10px);height:1px;background:repeating-linear-gradient(90deg,var(--border) 0,var(--border) 6px,transparent 6px,transparent 14px)}
+.step{position:relative}
+.stepnum{width:40px;height:40px;border-radius:10px;border:1.5px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--ink2);transition:all .3s;position:relative;z-index:1}
+.step:hover .stepnum{background:var(--ink);color:var(--bg);border-color:var(--ink);transform:scale(1.1)}
+.stept{font-weight:700;font-size:14px;color:var(--ink);margin-bottom:6px;letter-spacing:-.1px}
+.stepd{font-size:12.5px;color:var(--ink2);line-height:1.65}
+
+/* FEATURES */
+.fbg{background:var(--ink)}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(245,242,235,.08);border:1px solid rgba(245,242,235,.08);border-radius:16px;overflow:hidden;margin-top:46px}
+.fcard{background:var(--ink);padding:32px 28px;transition:background .2s}
+.fcard:hover{background:#252320}
+.ficon{width:40px;height:40px;border-radius:10px;border:1px solid rgba(245,242,235,.12);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+.ft{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--bg);margin-bottom:7px;letter-spacing:-.2px}
+.fd{font-size:13px;color:rgba(245,242,235,.45);line-height:1.7}
+
+/* TESTIMONIALS */
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
+.tcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px 22px;transition:all .25s}
+.tcard:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(26,24,20,.08);border-color:var(--borderh)}
+.tqmark{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;line-height:1;color:var(--accent);opacity:.2;margin-bottom:8px;display:block}
+.tstars{display:flex;gap:2px;margin-bottom:12px}
+.tstar{color:var(--accent);font-size:13px}
+.ttext{font-size:13.5px;color:var(--ink2);line-height:1.8;margin-bottom:18px}
+.tauth{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--border)}
+.tav{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
+.tname{font-weight:700;font-size:13px;color:var(--ink)}
+.trole{font-size:11px;color:var(--ink3);margin-top:1px}
+
+/* FAQ */
+.faqwrap{max-width:720px;margin-top:46px;display:flex;flex-direction:column;gap:8px}
+.faqitem{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s}
+.faqitem.open{border-color:var(--borderh)}
+.faqq{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;cursor:pointer;user-select:none;gap:14px}
+.faqqt{font-weight:600;font-size:14px;color:var(--ink)}
+.faqico{width:26px;height:26px;border-radius:6px;background:rgba(26,24,20,.05);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--ink2);font-size:16px;transition:all .25s;flex-shrink:0}
+.faqitem.open .faqico{background:var(--ink);color:var(--bg);border-color:var(--ink);transform:rotate(45deg)}
+.faqa{display:none;padding:0 22px 18px;font-size:13.5px;color:var(--ink2);line-height:1.8}
+.faqitem.open .faqa{display:block}
+
+/* CTA SECTION */
+.ctasec{margin:0 clamp(20px,4vw,60px) clamp(64px,8vw,100px);background:var(--ink);border-radius:20px;padding:clamp(48px,6vw,80px) clamp(28px,5vw,64px);display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;overflow:hidden;position:relative}
+.ctasec::before{content:"";position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,84,14,.15),transparent 70%);pointer-events:none}
+.ctabadge{display:inline-flex;align-items:center;gap:7px;background:rgba(245,242,235,.08);border:1px solid rgba(245,242,235,.12);border-radius:100px;padding:6px 14px;font-size:11px;font-weight:700;color:rgba(245,242,235,.6);letter-spacing:1px;margin-bottom:20px;text-transform:uppercase}
+.ctatitle{font-family:'Syne',sans-serif;font-size:clamp(34px,4vw,52px);font-weight:800;color:var(--bg);line-height:1;letter-spacing:-1.5px;margin-bottom:14px}
+.ctatitle span{color:var(--accentl)}
+.ctadesc{font-size:14px;color:rgba(245,242,235,.5);line-height:1.8;margin-bottom:30px}
+.ctabtns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-light{background:var(--bg);color:var(--ink);border:none;border-radius:8px;padding:14px 28px;font-size:14px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-light:hover{background:#fff;transform:translateY(-2px)}
+.btn-outline-light{background:transparent;color:rgba(245,242,235,.6);border:1.5px solid rgba(245,242,235,.2);border-radius:8px;padding:13px 22px;font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-outline-light:hover{border-color:rgba(245,242,235,.4);color:var(--bg)}
+.ctaright{display:flex;flex-direction:column;gap:12px}
+.ctatick{display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(245,242,235,.7)}
+.ctaico{width:32px;height:32px;border-radius:8px;background:rgba(245,242,235,.06);border:1px solid rgba(245,242,235,.1);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+
+/* FOOTER */
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px clamp(20px,5vw,60px) 28px}
+.ftop{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+.fbrand .bname{display:block;margin-bottom:12px}
+.fbrandp{font-size:13px;color:var(--ink2);max-width:240px;line-height:1.75}
+.fcol h4{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.fcol ul li a{text-decoration:none;color:var(--ink2);font-size:13px;font-weight:500;transition:color .2s}
+.fcol ul li a:hover{color:var(--ink)}
+.fbot{border-top:1px solid var(--border);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.fbot p{font-size:12px;color:var(--ink3)}
+.fbot .heart{color:var(--accent)}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease}
+.rv.on{opacity:1;transform:translateY(0)}
+
+/* MARQUEE */
+.mq{overflow:hidden;padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--card)}
+.mqt{display:flex;width:max-content;animation:marquee 22s linear infinite}
+.mqi{display:flex;align-items:center;gap:8px;padding:0 24px;font-size:12px;font-weight:600;color:var(--ink2);white-space:nowrap;letter-spacing:.5px}
+.mqd{color:var(--accentl);font-size:14px}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr;gap:48px;padding-top:100px}
+  .hright{max-width:500px}
+  .pgrid,.fgrid,.tgrid{grid-template-columns:repeat(2,1fr)}
+  .sgrid{grid-template-columns:repeat(4,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr);gap:28px}
+  .steps::before{display:none}
+  .ctasec{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .nav{display:none}.ham{display:flex}
+  .pgrid,.fgrid,.tgrid,.sgrid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr;gap:22px}
+  .ftop{flex-direction:column}
+  .fbot{flex-direction:column;text-align:center}
+  .statsinner{justify-content:center;gap:28px}
+  .sdiv{display:none}
+  .hero{grid-template-columns:1fr}
+}
+@media(max-width:420px){.hbtns,.ctabtns{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <a href="/" class="brand">
+    <div class="blogo"><img src="https://png.pngtree.com/template/20191111/ourmid/pngtree-mv-vm-letter-vector-logo-image_332121.jpg" alt="Mtaiirus" onerror="this.parentElement.innerHTML='<span style=\'font-family:Syne,sans-serif;font-size:19px;font-weight:800;color:var(--accent)\'>M</span>'"></div>
+    <span class="bname">MTAI<span>IRUS</span></span>
+  </a>
+  <nav class="nav" id="desknav">
+    <a href="#platforms">Platforms</a>
+    <a href="#subjects">Subjects</a>
+    <a href="#features">Features</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://t.me/shp910" class="pill">Join Telegram →</a>
+  </nav>
+  <button class="ham" id="ham">☰</button>
+</header>
+
+<div class="drawer" id="drawer">
+  <a href="#platforms" onclick="cd()">📱 Platforms</a>
+  <a href="#subjects" onclick="cd()">📚 Subjects</a>
+  <a href="#features" onclick="cd()">✨ Features</a>
+  <a href="#faq" onclick="cd()">❓ FAQ</a>
+  <a href="https://t.me/shp910" onclick="cd()">📢 Telegram</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero">
+    <div class="hleft">
+      <div class="htag"><span class="hpulse"></span>India's #1 Free EdTech Portal</div>
+      <h1>STOP<br><span class="cross">PAYING</span><br>FOR <em>COURSES.</em></h1>
+      <p class="hsub">Premium batches from Physics Wallah, Next Toppers, Mission JEET — unlocked. Free forever. No sign-up. No subscription. Just study.</p>
+      <div class="hbtns">
+        <a href="#platforms" class="btn-primary">Explore Platforms →</a>
+        <a href="#subjects" class="btn-accent">Browse Subjects</a>
+        <a href="https://t.me/shp910" class="btn-ghost">Join Telegram</a>
+      </div>
+    </div>
+    <div class="hright">
+      <div class="fchip fc1"><span class="fcot"></span>New batch dropped · JEE 2026</div>
+      <div class="hcard-main">
+        <div class="hcard-head">
+          <span class="hcard-title">Available Batches</span>
+          <span class="hcard-badge">1000+ Free</span>
+        </div>
+        <div class="course-item">
+          <div class="cico math">🧮</div>
+          <div class="cinfo">
+            <div class="cname">JEE Maths — Complete Batch</div>
+            <div class="cmeta">Physics Wallah <span>·</span> 280 Lectures</div>
+          </div>
+          <span class="cfree">FREE</span>
+        </div>
+        <div class="course-item">
+          <div class="cico phy">⚛️</div>
+          <div class="cinfo">
+            <div class="cname">NEET Physics — Crash Course</div>
+            <div class="cmeta">Next Toppers <span>·</span> 140 Lectures</div>
+          </div>
+          <span class="cfree">FREE</span>
+        </div>
+        <div class="course-item">
+          <div class="cico chem">🧪</div>
+          <div class="cinfo">
+            <div class="cname">Chemistry Master Class</div>
+            <div class="cmeta">Mission JEET <span>·</span> 190 Lectures</div>
+          </div>
+          <span class="cfree">FREE</span>
+        </div>
+      </div>
+      <div class="fchip fc2"><span class="fcot"></span>50,000+ students learning</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="statsrow">
+  <div class="statsinner">
+    <div class="sbox"><div class="snum"><span>1000</span>+</div><div class="slbl">Batches Unlocked</div></div>
+    <div class="sdiv"></div>
+    <div class="sbox"><div class="snum"><span>3</span></div><div class="slbl">Partner Platforms</div></div>
+    <div class="sdiv"></div>
+    <div class="sbox"><div class="snum"><span>₹0</span></div><div class="slbl">Cost Forever</div></div>
+    <div class="sdiv"></div>
+    <div class="sbox"><div class="snum"><span>50K</span>+</div><div class="slbl">Students</div></div>
+    <div class="sdiv"></div>
+    <div class="sbox"><div class="snum"><span>24/7</span></div><div class="slbl">Access</div></div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mqt">
+    <div class="mqi">Physics Wallah</div><div class="mqd">◆</div>
+    <div class="mqi">Next Toppers</div><div class="mqd">◆</div>
+    <div class="mqi">Mission JEET</div><div class="mqd">◆</div>
+    <div class="mqi">Free Premium Access</div><div class="mqd">◆</div>
+    <div class="mqi">No Subscription</div><div class="mqd">◆</div>
+    <div class="mqi">Instant Access</div><div class="mqd">◆</div>
+    <div class="mqi">JEE · NEET · Boards</div><div class="mqd">◆</div>
+    <div class="mqi">All Devices</div><div class="mqd">◆</div>
+    <div class="mqi">Physics Wallah</div><div class="mqd">◆</div>
+    <div class="mqi">Next Toppers</div><div class="mqd">◆</div>
+    <div class="mqi">Mission JEET</div><div class="mqd">◆</div>
+    <div class="mqi">Free Premium Access</div><div class="mqd">◆</div>
+    <div class="mqi">No Subscription</div><div class="mqd">◆</div>
+    <div class="mqi">Instant Access</div><div class="mqd">◆</div>
+    <div class="mqi">JEE · NEET · Boards</div><div class="mqd">◆</div>
+    <div class="mqi">All Devices</div><div class="mqd">◆</div>
+  </div>
+</div>
+
+<!-- PLATFORMS -->
+<div id="platforms">
+  <div class="sec">
+    <div class="slbl-row rv"><div class="slbl-line"></div><span class="slbl-txt">Partner Platforms</span></div>
+    <h2 class="stitle rv">Pick Your <em style="font-style:normal;color:var(--accent)">Platform</em></h2>
+    <p class="sdesc rv">Three of India's top ed-tech platforms. All unlocked. All free.</p>
+    <div class="pgrid">
+      <a href="/batches" class="pcard pc1 rv">
+        <div class="pnum">01</div>
+        <div class="plogo-wrap"><span class="plogo-txt" style="color:var(--accent)">RGV</span></div>
+        <div class="pname">RG Vikramjeet</div>
+        <div class="pdesc">India's top JEE & NEET educator. Expert-crafted lectures with complete syllabus coverage for serious aspirants.</div>
+        <div class="ptag"><span class="ptdot"></span>Live Batches Available</div>
+      </a>
+      <a href="https://nt.rarestudy.in/" class="pcard pc2 rv">
+        <div class="pnum">02</div>
+        <div class="plogo-wrap"><img src="https://decicqog4ulhy.cloudfront.net/0/admin_v2/uploads/courses/thumbnail/2671188_1_logo.jpg" alt="Next Toppers" loading="lazy" onerror="this.closest('.plogo-wrap').innerHTML='<span style=\'font-size:22px\'>🎯</span>'"></div>
+        <div class="pname">Next Toppers</div>
+        <div class="pdesc">Structured batch programs and high-quality video lectures from expert faculty for all competitive exams.</div>
+        <div class="ptag" style="color:var(--blue);background:var(--bluel);border-color:rgba(26,75,140,.2)"><span class="ptdot" style="background:var(--blue)"></span>Premium Courses Free</div>
+      </a>
+      <a href="https://mission-jeet.lovable.app/" class="pcard pc3 rv">
+        <div class="pnum">03</div>
+        <div class="plogo-wrap"><img src="https://dxixtlyravvxx.cloudfront.net/1772100600/admin_v2/uploads/courses/thumbnail/4661462_1_MissionJEET-Logo.png" alt="Mission JEET" loading="lazy" onerror="this.closest('.plogo-wrap').innerHTML='<span style=\'font-size:22px\'>🏆</span>'"></div>
+        <div class="pname">Mission JEET</div>
+        <div class="pdesc">Full syllabus coverage, expert-curated content, and regular test series for JEE and NEET aspirants.</div>
+        <div class="ptag" style="color:var(--green);background:var(--greenl);border-color:rgba(45,106,63,.2)"><span class="ptdot" style="background:var(--green)"></span>All Batches Unlocked</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- SUBJECTS -->
+<div class="sbg" id="subjects">
+  <div class="sec">
+    <div class="slbl-row rv"><div class="slbl-line"></div><span class="slbl-txt">Browse by Subject</span></div>
+    <h2 class="stitle rv">Find Your <em style="font-style:normal;color:var(--accent)">Subject</em></h2>
+    <p class="sdesc rv">Every major subject across JEE, NEET, and Boards — all in one place.</p>
+    <div class="sgrid">
+      <a href="#platforms" class="scard rv"><div class="sico" style="background:#FFF0E6">🧮</div><div class="sn">Mathematics</div><div class="sc">120+ Batches</div></a>
+      <a href="#platforms" class="scard rv"><div class="sico" style="background:#E8F0FF">⚛️</div><div class="sn">Physics</div><div class="sc">95+ Batches</div></a>
+      <a href="#platforms" class="scard rv"><div class="sico" style="background:#EAFBF0">🧪</div><div class="sn">Chemistry</div><div class="sc">88+ Batches</div></a>
+      <a href="#platforms" class="scard rv"><div class="sico" style="background:#FFF5E0">🧬</div><div class="sn">Biology</div><div class="sc">72+ Batches</div></a>
+      <a href="#platforms" class="scard rv"><div class="sico" style="background:#F0F0FF">💡</div><div class="sn">JEE Advanced</div><div class="sc">60+ Batches</div></a>
+      <a href="#platforms" class="scard rv"><div class="sico" style="background:#FFE8EC">🩺</div><div class="sn">NEET UG</div><div class="sc">80+ Batches</div></a>
+      <a href="#platforms" class="scard rv"><div class="sico" style="background:#E8F5FF">📖</div><div class="sn">Class 10 Boards</div><div class="sc">45+ Batches</div></a>
+      <a href="#platforms" class="scard rv"><div class="sico" style="background:#F5EBF5">🎓</div><div class="sn">Class 12 Boards</div><div class="sc">55+ Batches</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div style="background:var(--bg)">
+  <div class="sec rv">
+    <div class="slbl-row"><div class="slbl-line"></div><span class="slbl-txt">How It Works</span></div>
+    <h2 class="stitle">4 Steps to <em style="font-style:normal;color:var(--accent)">Free Learning</em></h2>
+    <p class="sdesc">No account. No card. No waiting. Just pick and play.</p>
+    <div class="steps">
+      <div class="step rv"><div class="stepnum">01</div><div class="stept">Choose a Platform</div><div class="stepd">Pick from our three partner platforms — Physics Wallah, Next Toppers, or Mission JEET.</div></div>
+      <div class="step rv"><div class="stepnum">02</div><div class="stept">Browse Batches</div><div class="stepd">Search through 1000+ premium batches across all subjects and exam categories.</div></div>
+      <div class="step rv"><div class="stepnum">03</div><div class="stept">Watch &amp; Learn</div><div class="stepd">Stream any lecture instantly. Fully unlocked. Zero subscription required.</div></div>
+      <div class="step rv"><div class="stepnum">04</div><div class="stept">Stay Updated</div><div class="stepd">Join our Telegram to get notified the second new batches drop.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="fbg" id="features">
+  <div class="sec">
+    <div class="slbl-row rv"><div class="slbl-line" style="background:var(--accentl)"></div><span class="slbl-txt" style="color:var(--accentl)">Why Mtaiirus</span></div>
+    <h2 class="stitle rv" style="color:var(--bg)">Everything You <em style="font-style:normal;color:var(--accentl)">Need</em></h2>
+    <p class="sdesc rv" style="color:rgba(245,242,235,.5)">We handle access. You focus on cracking the exam.</p>
+    <div class="fgrid">
+      <div class="fcard rv"><div class="ficon">🆓</div><div class="ft">Always Free</div><div class="fd">Zero cost, zero subscription, zero compromise. No hidden fees. No trials. Ever.</div></div>
+      <div class="fcard rv"><div class="ficon">⚡</div><div class="ft">Instant Access</div><div class="fd">No waiting, no sign-up. Click a batch and start watching immediately.</div></div>
+      <div class="fcard rv"><div class="ficon">📱</div><div class="ft">All Devices</div><div class="fd">Phone, tablet, desktop — optimized for every screen size and connection speed.</div></div>
+      <div class="fcard rv"><div class="ficon">🔄</div><div class="ft">Always Updated</div><div class="fd">New batches added regularly. Telegram updates so you never miss a drop.</div></div>
+      <div class="fcard rv"><div class="ficon">🔍</div><div class="ft">Smart Search</div><div class="fd">Fuzzy search finds any batch instantly — even with typos or partial keywords.</div></div>
+      <div class="fcard rv"><div class="ficon">❤️</div><div class="ft">Save Favourites</div><div class="fd">Bookmark any batch and jump right back to it anytime with one tap.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div style="background:var(--bg2)">
+  <div class="sec">
+    <div class="slbl-row rv"><div class="slbl-line"></div><span class="slbl-txt">Student Stories</span></div>
+    <h2 class="stitle rv">What Students <em style="font-style:normal;color:var(--accent)">Say</em></h2>
+    <p class="sdesc rv">Thousands crushing exams — completely free.</p>
+    <div class="tgrid">
+      <div class="tcard rv">
+        <span class="tqmark">"</span>
+        <div class="tstars"><span class="tstar">★</span><span class="tstar">★</span><span class="tstar">★</span><span class="tstar">★</span><span class="tstar">★</span></div>
+        <div class="ttext">Mtaiirus completely changed my prep. I couldn't afford PW Pro but got access to everything here for free. Ended up with AIR 4200!</div>
+        <div class="tauth"><div class="tav" style="background:var(--accentb);color:var(--accent)">AK</div><div><div class="tname">Arjun Kumar</div><div class="trole">JEE Advanced 2025 · AIR 4200</div></div></div>
+      </div>
+      <div class="tcard rv">
+        <span class="tqmark">"</span>
+        <div class="tstars"><span class="tstar">★</span><span class="tstar">★</span><span class="tstar">★</span><span class="tstar">★</span><span class="tstar">★</span></div>
+        <div class="ttext">NEET ki taiyari ke liye best platform hai. Mission JEET ke saare batches free mein mile. 680/720 score aaya!</div>
+        <div class="tauth"><div class="tav" style="background:var(--greenl);color:var(--green)">PS</div><div><div class="tname">Priya Sharma</div><div class="trole">NEET UG 2025 · 680/720</div></div></div>
+      </div>
+      <div class="tcard rv">
+        <span class="tqmark">"</span>
+        <div class="tstars"><span class="tstar">★</span><span class="tstar">★</span><span class="tstar">★</span><span class="tstar">★</span><span class="tstar">★</span></div>
+        <div class="ttext">The Next Toppers chemistry batch was perfect. Scored 95% in boards. The search feature makes finding the right batch incredibly easy.</div>
+        <div class="tauth"><div class="tav" style="background:var(--bluel);color:var(--blue)">RV</div><div><div class="tname">Rohan Verma</div><div class="trole">Class 12 Boards 2025 · 95%</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div id="faq" style="background:var(--bg)">
+  <div class="sec">
+    <div class="slbl-row rv"><div class="slbl-line"></div><span class="slbl-txt">Got Questions?</span></div>
+    <h2 class="stitle rv">Frequently Asked <em style="font-style:normal;color:var(--accent)">Questions</em></h2>
+    <div class="faqwrap">
+      <div class="faqitem rv"><div class="faqq"><span class="faqqt">Is Mtaiirus really 100% free?</span><span class="faqico">+</span></div><div class="faqa">Yes — completely free. No subscription, no credit card, no hidden charges ever. All premium batches from all platforms are unlocked at zero cost.</div></div>
+      <div class="faqitem rv"><div class="faqq"><span class="faqqt">Do I need to create an account?</span><span class="faqico">+</span></div><div class="faqa">No sign-up needed for most content. Just visit, pick your platform, browse batches, and start watching instantly.</div></div>
+      <div class="faqitem rv"><div class="faqq"><span class="faqqt">Which platforms are available on Mtaiirus?</span><span class="faqico">+</span></div><div class="faqa">We currently support Physics Wallah (RG Vikramjeet), Next Toppers, and Mission JEET — with 1000+ premium batches across all three.</div></div>
+      <div class="faqitem rv"><div class="faqq"><span class="faqqt">How do I get notified about new batches?</span><span class="faqico">+</span></div><div class="faqa">Join our Telegram channel at t.me/shp910b! We post all new batch drops there instantly. It's the fastest way to stay updated.</div></div>
+      <div class="faqitem rv"><div class="faqq"><span class="faqqt">Does it work on mobile?</span><span class="faqico">+</span></div><div class="faqa">Absolutely. Mtaiirus is fully optimized for mobile, tablet, and desktop. You can even install it as a PWA for an app-like experience.</div></div>
+      <div class="faqitem rv"><div class="faqq"><span class="faqqt">Which exams are covered?</span><span class="faqico">+</span></div><div class="faqa">JEE Mains, JEE Advanced, NEET UG, Class 10 & 12 Boards — across Physics, Chemistry, Maths, Biology, and more.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div style="padding:0 clamp(20px,4vw,60px) clamp(64px,8vw,100px);background:var(--bg)">
+  <div class="ctasec rv">
+    <div>
+      <div class="ctabadge">✦ Join 50K+ Students</div>
+      <div class="ctatitle">Start Learning <span>Free</span> Today.</div>
+      <p class="ctadesc">Premium courses from India's best educators. Zero cost. Zero friction. Start right now.</p>
+      <div class="ctabtns">
+        <a href="#platforms" class="btn-light">Explore Platforms →</a>
+        <a href="https://t.me/shp910b" class="btn-outline-light">Join Telegram</a>
+      </div>
+    </div>
+    <div class="ctaright">
+      <div class="ctatick"><div class="ctaico">🆓</div>Always free — no subscription ever</div>
+      <div class="ctatick"><div class="ctaico">⚡</div>Instant access to 1000+ batches</div>
+      <div class="ctatick"><div class="ctaico">📱</div>Works on any device, anywhere</div>
+      <div class="ctatick"><div class="ctaico">🔄</div>New batches added every week</div>
+      <div class="ctatick"><div class="ctaico">🔓</div>No sign-up required</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ftop">
+    <div class="fbrand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <div class="blogo"><img src="https://play-lh.googleusercontent.com/aFux_izD7qhcU2AskjHpzjGvCOQr2Vrn42OEQHF774zJZUycwvfPLanRtck0AQ-sdMpplPFLDmorOm7WOLSW" alt="Mtaiirus" onerror="this.parentElement.innerHTML='<span style=\'font-family:Syne,sans-serif;font-size:19px;font-weight:800;color:var(--accent)\'>M</span>'"></div>
+        <span class="bname" style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--ink)">MTAI<span style="color:var(--accent)">IRUS</span></span>
+      </div>
+      <p class="fbrandp">Free access to India's best premium ed-tech courses. Built with love for every student who deserves quality education.</p>
+    </div>
+    <div class="fcol">
+      <h4>Platforms</h4>
+      <ul>
+        <li><a href="/batches">RG Vikramjeet</a></li>
+        <li><a href="https://nt.rarestudy.in/">Next Toppers</a></li>
+        <li><a href="https://mission-jeet.lovable.app/">Mission JEET</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Subjects</h4>
+      <ul>
+        <li><a href="#subjects">Mathematics</a></li>
+        <li><a href="#subjects">Physics</a></li>
+        <li><a href="#subjects">Chemistry</a></li>
+        <li><a href="#subjects">Biology</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="https://t.me/shp910b">Telegram Channel</a></li>
+        <li><a href="https://t.me/shp910b">Get Support</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Site</h4>
+      <ul>
+        <li><a href="#platforms">Platforms</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>© 2025 Mtaiirus</p>
+    <p>Made with <span class="heart">♥</span> in India</p>
+  </div>
+</footer>
+
+<script>
+/* Scroll reveal */
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*60);obs.unobserve(e.target)}});
+},{threshold:.06,rootMargin:'0px 0px -24px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+/* Mobile drawer */
+const ham=document.getElementById('ham'),drawer=document.getElementById('drawer');
+ham.onclick=()=>drawer.classList.toggle('open');
+function cd(){drawer.classList.remove('open')}
+document.addEventListener('click',e=>{if(!ham.contains(e.target)&&!drawer.contains(e.target))cd()});
+
+/* FAQ */
+document.querySelectorAll('.faqq').forEach(q=>{
+  q.onclick=()=>{
+    const item=q.parentElement;
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faqitem').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen)item.classList.add('open');
+  };
+});
+
+/* Content protection */
+(function(){
+  ["contextmenu","selectstart","dragstart","copy"].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault()));
+  document.addEventListener("keydown",(e)=>{
+    const blocked=e.key==="F12"||(e.ctrlKey&&e.shiftKey&&["I","J","C"].includes(e.key))||(e.ctrlKey&&["U","S"].includes(e.key));
+    if(blocked){e.preventDefault();return false}
+  });
+})();
+</script>
+</body>
+</html>
