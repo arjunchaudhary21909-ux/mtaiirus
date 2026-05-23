@@ -29,6 +29,43 @@
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-tap-highlight-color:transparent}
 
+/* FLOATING WORDS BACKGROUND */
+.floating-words {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0.05;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  color: var(--ink);
+  white-space: nowrap;
+  user-select: none;
+}
+.float-word {
+  position: absolute;
+  animation: floatAround 26s infinite alternate ease-in-out;
+  letter-spacing: -2px;
+}
+.float-word:nth-child(1) { top: 8%; left: 3%; animation-duration: 22s; }
+.float-word:nth-child(2) { top: 22%; right: 5%; animation-duration: 30s; animation-delay: -5s; }
+.float-word:nth-child(3) { bottom: 18%; left: 8%; animation-duration: 24s; animation-delay: -8s; }
+.float-word:nth-child(4) { bottom: 32%; right: 4%; animation-duration: 28s; animation-delay: -13s; }
+.float-word:nth-child(5) { top: 48%; left: 28%; animation-duration: 32s; animation-delay: -4s; }
+.float-word:nth-child(6) { top: 68%; right: 18%; animation-duration: 20s; animation-delay: -10s; }
+.float-word:nth-child(7) { top: 14%; left: 58%; animation-duration: 27s; animation-delay: -16s; }
+.float-word:nth-child(8) { bottom: 8%; left: 42%; animation-duration: 34s; animation-delay: -7s; }
+
+@keyframes floatAround {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(35px, -25px) rotate(1.5deg); }
+  50% { transform: translate(-25px, 30px) rotate(-1.5deg); }
+  75% { transform: translate(20px, 15px) rotate(0.8deg); }
+  100% { transform: translate(-15px, -20px) rotate(-0.8deg); }
+}
+
 /* TEXTURE OVERLAY */
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
 
@@ -51,7 +88,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .drawer a:hover{color:var(--ink);background:rgba(26,24,20,.06)}
 
 /* HERO */
-.hero{padding:clamp(100px,14vw,160px) clamp(20px,5vw,60px) clamp(60px,8vw,100px);max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero{padding:clamp(100px,14vw,160px) clamp(20px,5vw,60px) clamp(60px,8vw,100px);max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
 .hleft{position:relative}
 .htag{display:inline-flex;align-items:center;gap:8px;background:var(--greenl);color:var(--green);font-size:11px;font-weight:600;padding:6px 14px;border-radius:100px;letter-spacing:.8px;margin-bottom:28px;text-transform:uppercase}
 .hpulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
@@ -69,7 +106,7 @@ h1 em{font-style:normal;color:var(--accent)}
 .btn-ghost{background:transparent;color:var(--ink2);border:1px solid var(--border);border-radius:8px;padding:13px 22px;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
 .btn-ghost:hover{border-color:var(--borderh);color:var(--ink);transform:translateY(-1px)}
 
-/* HERO RIGHT — VISUAL CARD */
+/* HERO RIGHT */
 .hright{position:relative}
 .hcard-main{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:0 2px 0 var(--border),0 20px 60px rgba(26,24,20,.08)}
 .hcard-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
@@ -86,15 +123,14 @@ h1 em{font-style:normal;color:var(--accent)}
 .cmeta{font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:8px}
 .cfree{font-size:10px;font-weight:700;color:var(--green);background:var(--greenl);padding:3px 8px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
 
-/* floating chips */
 .fchip{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:11px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:7px;box-shadow:0 4px 16px rgba(26,24,20,.08);white-space:nowrap;animation:float 4s ease-in-out infinite}
 .fc1{top:-24px;right:30px;animation-delay:0s}
 .fc2{bottom:-20px;left:-10px;animation-delay:1.5s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .fcot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
 
-/* STATS ROW */
-.statsrow{background:var(--ink);padding:clamp(28px,4vw,44px) clamp(20px,5vw,60px)}
+/* STATS */
+.statsrow{background:var(--ink);padding:clamp(28px,4vw,44px) clamp(20px,5vw,60px);position:relative;z-index:1}
 .statsinner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .sbox{text-align:center}
 .snum{font-family:'Syne',sans-serif;font-size:clamp(30px,4vw,48px);font-weight:800;color:var(--bg);line-height:1}
@@ -103,7 +139,7 @@ h1 em{font-style:normal;color:var(--accent)}
 .sdiv{width:1px;height:40px;background:rgba(245,242,235,.1)}
 
 /* SECTION */
-.sec{padding:clamp(64px,8vw,104px) clamp(20px,5vw,60px);max-width:1200px;margin:0 auto}
+.sec{padding:clamp(64px,8vw,104px) clamp(20px,5vw,60px);max-width:1200px;margin:0 auto;position:relative;z-index:1}
 .slbl-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .slbl-line{width:24px;height:2px;background:var(--accent);border-radius:2px;flex-shrink:0}
 .slbl-txt{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2px}
@@ -128,10 +164,10 @@ h1 em{font-style:normal;color:var(--accent)}
 .ptag{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;color:var(--accent);background:var(--accentb);border:1px solid rgba(212,84,14,.2);border-radius:100px;padding:5px 12px;width:fit-content;text-transform:uppercase;letter-spacing:.8px}
 .ptdot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
 
-/* SUBJECTS */
-.sbg{background:var(--bg2)}
+/* SUBJECTS - DISPLAY ONLY */
+.sbg{background:var(--bg2);position:relative;z-index:1}
 .sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px}
-.scard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;text-decoration:none;color:inherit;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:10px}
+.scard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;transition:all .2s;cursor:default;user-select:none}
 .scard:hover{transform:translateY(-4px);border-color:var(--borderh);box-shadow:0 12px 32px rgba(26,24,20,.08)}
 .sico{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:2px}
 .sn{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.2px}
@@ -147,7 +183,7 @@ h1 em{font-style:normal;color:var(--accent)}
 .stepd{font-size:12.5px;color:var(--ink2);line-height:1.65}
 
 /* FEATURES */
-.fbg{background:var(--ink)}
+.fbg{background:var(--ink);position:relative;z-index:1}
 .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(245,242,235,.08);border:1px solid rgba(245,242,235,.08);border-radius:16px;overflow:hidden;margin-top:46px}
 .fcard{background:var(--ink);padding:32px 28px;transition:background .2s}
 .fcard:hover{background:#252320}
@@ -179,8 +215,8 @@ h1 em{font-style:normal;color:var(--accent)}
 .faqa{display:none;padding:0 22px 18px;font-size:13.5px;color:var(--ink2);line-height:1.8}
 .faqitem.open .faqa{display:block}
 
-/* CTA SECTION */
-.ctasec{margin:0 clamp(20px,4vw,60px) clamp(64px,8vw,100px);background:var(--ink);border-radius:20px;padding:clamp(48px,6vw,80px) clamp(28px,5vw,64px);display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;overflow:hidden;position:relative}
+/* CTA */
+.ctasec{margin:0 clamp(20px,4vw,60px) clamp(64px,8vw,100px);background:var(--ink);border-radius:20px;padding:clamp(48px,6vw,80px) clamp(28px,5vw,64px);display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;overflow:hidden;position:relative;z-index:1}
 .ctasec::before{content:"";position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,84,14,.15),transparent 70%);pointer-events:none}
 .ctabadge{display:inline-flex;align-items:center;gap:7px;background:rgba(245,242,235,.08);border:1px solid rgba(245,242,235,.12);border-radius:100px;padding:6px 14px;font-size:11px;font-weight:700;color:rgba(245,242,235,.6);letter-spacing:1px;margin-bottom:20px;text-transform:uppercase}
 .ctatitle{font-family:'Syne',sans-serif;font-size:clamp(34px,4vw,52px);font-weight:800;color:var(--bg);line-height:1;letter-spacing:-1.5px;margin-bottom:14px}
@@ -196,7 +232,7 @@ h1 em{font-style:normal;color:var(--accent)}
 .ctaico{width:32px;height:32px;border-radius:8px;background:rgba(245,242,235,.06);border:1px solid rgba(245,242,235,.1);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 
 /* FOOTER */
-.footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px clamp(20px,5vw,60px) 28px}
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px clamp(20px,5vw,60px) 28px;position:relative;z-index:1}
 .ftop{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px}
 .fbrand .bname{display:block;margin-bottom:12px}
 .fbrandp{font-size:13px;color:var(--ink2);max-width:240px;line-height:1.75}
@@ -213,7 +249,7 @@ h1 em{font-style:normal;color:var(--accent)}
 .rv.on{opacity:1;transform:translateY(0)}
 
 /* MARQUEE */
-.mq{overflow:hidden;padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--card)}
+.mq{overflow:hidden;padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--card);position:relative;z-index:1}
 .mqt{display:flex;width:max-content;animation:marquee 22s linear infinite}
 .mqi{display:flex;align-items:center;gap:8px;padding:0 24px;font-size:12px;font-weight:600;color:var(--ink2);white-space:nowrap;letter-spacing:.5px}
 .mqd{color:var(--accentl);font-size:14px}
@@ -238,16 +274,29 @@ h1 em{font-style:normal;color:var(--accent)}
   .statsinner{justify-content:center;gap:28px}
   .sdiv{display:none}
   .hero{grid-template-columns:1fr}
+  .sgrid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:420px){.hbtns,.ctabtns{flex-direction:column}}
 </style>
 </head>
 <body>
 
+<!-- FLOATING WORDS BACKGROUND -->
+<div class="floating-words">
+  <div class="float-word">FREE COURSES</div>
+  <div class="float-word">JEE · NEET</div>
+  <div class="float-word">PHYSICS WALLAH</div>
+  <div class="float-word">NEXT TOPPERS</div>
+  <div class="float-word">MISSION JEET</div>
+  <div class="float-word">PREMIUM BATCHES</div>
+  <div class="float-word">NO SIGNUP</div>
+  <div class="float-word">MTAIIRUS</div>
+</div>
+
 <!-- HEADER -->
 <header class="hdr">
   <a href="/" class="brand">
-    <div class="blogo"><img src="https://png.pngtree.com/template/20191111/ourmid/pngtree-mv-vm-letter-vector-logo-image_332121.jpg" alt="Mtaiirus" onerror="this.parentElement.innerHTML='<span style=\'font-family:Syne,sans-serif;font-size:19px;font-weight:800;color:var(--accent)\'>M</span>'"></div>
+    <div class="blogo"><img src="https://i.ibb.co/G3TLgSgJ/pngtree-mv-vm-letter-vector-logo-image-332121.jpg" alt="Mtaiirus" onerror="this.parentElement.innerHTML='<span style=\'font-family:Syne,sans-serif;font-size:19px;font-weight:800;color:var(--accent)\'>M</span>'"></div>
     <span class="bname">MTAI<span>IRUS</span></span>
   </a>
   <nav class="nav" id="desknav">
@@ -255,7 +304,7 @@ h1 em{font-style:normal;color:var(--accent)}
     <a href="#subjects">Subjects</a>
     <a href="#features">Features</a>
     <a href="#faq">FAQ</a>
-    <a href="https://t.me/shp910" class="pill">Join Telegram →</a>
+    <a href="https://t.me/mtaiirus" class="pill">Join Telegram →</a>
   </nav>
   <button class="ham" id="ham">☰</button>
 </header>
@@ -265,7 +314,7 @@ h1 em{font-style:normal;color:var(--accent)}
   <a href="#subjects" onclick="cd()">📚 Subjects</a>
   <a href="#features" onclick="cd()">✨ Features</a>
   <a href="#faq" onclick="cd()">❓ FAQ</a>
-  <a href="https://t.me/shp910" onclick="cd()">📢 Telegram</a>
+  <a href="https://t.me/mtaiirus" onclick="cd()">📢 Telegram</a>
 </div>
 
 <!-- HERO -->
@@ -278,7 +327,7 @@ h1 em{font-style:normal;color:var(--accent)}
       <div class="hbtns">
         <a href="#platforms" class="btn-primary">Explore Platforms →</a>
         <a href="#subjects" class="btn-accent">Browse Subjects</a>
-        <a href="https://t.me/shp910" class="btn-ghost">Join Telegram</a>
+        <a href="https://t.me/mtaiirus" class="btn-ghost">Join Telegram</a>
       </div>
     </div>
     <div class="hright">
@@ -362,21 +411,21 @@ h1 em{font-style:normal;color:var(--accent)}
     <h2 class="stitle rv">Pick Your <em style="font-style:normal;color:var(--accent)">Platform</em></h2>
     <p class="sdesc rv">Three of India's top ed-tech platforms. All unlocked. All free.</p>
     <div class="pgrid">
-      <a href="rgvikramjeet.base44.app" class="pcard pc1 rv">
+      <a href="https://rgvikramjeet.base44.app" class="pcard pc1 rv" target="_blank">
         <div class="pnum">01</div>
-        <div class="plogo-wrap"><span class="plogo-txt" style="color:var(--accent)">RGV</span></div>
+        <div class="plogo-wrap"><img src="https://decicqog4ulhy.cloudfront.net/0/admin_v1/application_management/clientlogo/2699391753_Frame%203.png" alt="RG Vikramjeet" onerror="this.closest('.plogo-wrap').innerHTML='<span class=\'plogo-txt\' style=\'color:var(--accent)\'>RGV</span>'"></div>
         <div class="pname">RG Vikramjeet</div>
         <div class="pdesc">India's top JEE & NEET educator. Expert-crafted lectures with complete syllabus coverage for serious aspirants.</div>
         <div class="ptag"><span class="ptdot"></span>Live Batches Available</div>
       </a>
-      <a href="https://nxttoppers.lovable.app/" class="pcard pc2 rv">
+      <a href="https://nxttoppers.lovable.app/" class="pcard pc2 rv" target="_blank">
         <div class="pnum">02</div>
         <div class="plogo-wrap"><img src="https://decicqog4ulhy.cloudfront.net/0/admin_v2/uploads/courses/thumbnail/2671188_1_logo.jpg" alt="Next Toppers" loading="lazy" onerror="this.closest('.plogo-wrap').innerHTML='<span style=\'font-size:22px\'>🎯</span>'"></div>
         <div class="pname">Next Toppers</div>
         <div class="pdesc">Structured batch programs and high-quality video lectures from expert faculty for all competitive exams.</div>
         <div class="ptag" style="color:var(--blue);background:var(--bluel);border-color:rgba(26,75,140,.2)"><span class="ptdot" style="background:var(--blue)"></span>Premium Courses Free</div>
       </a>
-      <a href="https://mission-jeet.lovable.app/" class="pcard pc3 rv">
+      <a href="https://mission-jeet.lovable.app/" class="pcard pc3 rv" target="_blank">
         <div class="pnum">03</div>
         <div class="plogo-wrap"><img src="https://dxixtlyravvxx.cloudfront.net/1772100600/admin_v2/uploads/courses/thumbnail/4661462_1_MissionJEET-Logo.png" alt="Mission JEET" loading="lazy" onerror="this.closest('.plogo-wrap').innerHTML='<span style=\'font-size:22px\'>🏆</span>'"></div>
         <div class="pname">Mission JEET</div>
@@ -387,27 +436,27 @@ h1 em{font-style:normal;color:var(--accent)}
   </div>
 </div>
 
-<!-- SUBJECTS -->
+<!-- SUBJECTS - DISPLAY ONLY -->
 <div class="sbg" id="subjects">
   <div class="sec">
     <div class="slbl-row rv"><div class="slbl-line"></div><span class="slbl-txt">Browse by Subject</span></div>
     <h2 class="stitle rv">Find Your <em style="font-style:normal;color:var(--accent)">Subject</em></h2>
-    <p class="sdesc rv">Every major subject across JEE, NEET, and Boards — all in one place.</p>
+    <p class="sdesc rv">Every major subject across JEE, NEET, and Boards — all in one place. (Display only)</p>
     <div class="sgrid">
-      <a href="#platforms" class="scard rv"><div class="sico" style="background:#FFF0E6">🧮</div><div class="sn">Mathematics</div><div class="sc">120+ Batches</div></a>
-      <a href="#platforms" class="scard rv"><div class="sico" style="background:#E8F0FF">⚛️</div><div class="sn">Physics</div><div class="sc">95+ Batches</div></a>
-      <a href="#platforms" class="scard rv"><div class="sico" style="background:#EAFBF0">🧪</div><div class="sn">Chemistry</div><div class="sc">88+ Batches</div></a>
-      <a href="#platforms" class="scard rv"><div class="sico" style="background:#FFF5E0">🧬</div><div class="sn">Biology</div><div class="sc">72+ Batches</div></a>
-      <a href="#platforms" class="scard rv"><div class="sico" style="background:#F0F0FF">💡</div><div class="sn">JEE Advanced</div><div class="sc">60+ Batches</div></a>
-      <a href="#platforms" class="scard rv"><div class="sico" style="background:#FFE8EC">🩺</div><div class="sn">NEET UG</div><div class="sc">80+ Batches</div></a>
-      <a href="#platforms" class="scard rv"><div class="sico" style="background:#E8F5FF">📖</div><div class="sn">Class 10 Boards</div><div class="sc">45+ Batches</div></a>
-      <a href="#platforms" class="scard rv"><div class="sico" style="background:#F5EBF5">🎓</div><div class="sn">Class 12 Boards</div><div class="sc">55+ Batches</div></a>
+      <div class="scard rv"><div class="sico" style="background:#FFF0E6">🧮</div><div class="sn">Mathematics</div><div class="sc">120+ Batches</div></div>
+      <div class="scard rv"><div class="sico" style="background:#E8F0FF">⚛️</div><div class="sn">Physics</div><div class="sc">95+ Batches</div></div>
+      <div class="scard rv"><div class="sico" style="background:#EAFBF0">🧪</div><div class="sn">Chemistry</div><div class="sc">88+ Batches</div></div>
+      <div class="scard rv"><div class="sico" style="background:#FFF5E0">🧬</div><div class="sn">Biology</div><div class="sc">72+ Batches</div></div>
+      <div class="scard rv"><div class="sico" style="background:#F0F0FF">💡</div><div class="sn">JEE Advanced</div><div class="sc">60+ Batches</div></div>
+      <div class="scard rv"><div class="sico" style="background:#FFE8EC">🩺</div><div class="sn">NEET UG</div><div class="sc">80+ Batches</div></div>
+      <div class="scard rv"><div class="sico" style="background:#E8F5FF">📖</div><div class="sn">Class 10 Boards</div><div class="sc">45+ Batches</div></div>
+      <div class="scard rv"><div class="sico" style="background:#F5EBF5">🎓</div><div class="sn">Class 12 Boards</div><div class="sc">55+ Batches</div></div>
     </div>
   </div>
 </div>
 
 <!-- HOW IT WORKS -->
-<div style="background:var(--bg)">
+<div style="background:var(--bg);position:relative;z-index:1">
   <div class="sec rv">
     <div class="slbl-row"><div class="slbl-line"></div><span class="slbl-txt">How It Works</span></div>
     <h2 class="stitle">4 Steps to <em style="font-style:normal;color:var(--accent)">Free Learning</em></h2>
@@ -439,7 +488,7 @@ h1 em{font-style:normal;color:var(--accent)}
 </div>
 
 <!-- TESTIMONIALS -->
-<div style="background:var(--bg2)">
+<div style="background:var(--bg2);position:relative;z-index:1">
   <div class="sec">
     <div class="slbl-row rv"><div class="slbl-line"></div><span class="slbl-txt">Student Stories</span></div>
     <h2 class="stitle rv">What Students <em style="font-style:normal;color:var(--accent)">Say</em></h2>
@@ -468,7 +517,7 @@ h1 em{font-style:normal;color:var(--accent)}
 </div>
 
 <!-- FAQ -->
-<div id="faq" style="background:var(--bg)">
+<div id="faq" style="background:var(--bg);position:relative;z-index:1">
   <div class="sec">
     <div class="slbl-row rv"><div class="slbl-line"></div><span class="slbl-txt">Got Questions?</span></div>
     <h2 class="stitle rv">Frequently Asked <em style="font-style:normal;color:var(--accent)">Questions</em></h2>
@@ -476,7 +525,7 @@ h1 em{font-style:normal;color:var(--accent)}
       <div class="faqitem rv"><div class="faqq"><span class="faqqt">Is Mtaiirus really 100% free?</span><span class="faqico">+</span></div><div class="faqa">Yes — completely free. No subscription, no credit card, no hidden charges ever. All premium batches from all platforms are unlocked at zero cost.</div></div>
       <div class="faqitem rv"><div class="faqq"><span class="faqqt">Do I need to create an account?</span><span class="faqico">+</span></div><div class="faqa">No sign-up needed for most content. Just visit, pick your platform, browse batches, and start watching instantly.</div></div>
       <div class="faqitem rv"><div class="faqq"><span class="faqqt">Which platforms are available on Mtaiirus?</span><span class="faqico">+</span></div><div class="faqa">We currently support Physics Wallah (RG Vikramjeet), Next Toppers, and Mission JEET — with 1000+ premium batches across all three.</div></div>
-      <div class="faqitem rv"><div class="faqq"><span class="faqqt">How do I get notified about new batches?</span><span class="faqico">+</span></div><div class="faqa">Join our Telegram channel at t.me/shp910b! We post all new batch drops there instantly. It's the fastest way to stay updated.</div></div>
+      <div class="faqitem rv"><div class="faqq"><span class="faqqt">How do I get notified about new batches?</span><span class="faqico">+</span></div><div class="faqa">Join our Telegram channel at t.me/mtaiirus! We post all new batch drops there instantly. It's the fastest way to stay updated.</div></div>
       <div class="faqitem rv"><div class="faqq"><span class="faqqt">Does it work on mobile?</span><span class="faqico">+</span></div><div class="faqa">Absolutely. Mtaiirus is fully optimized for mobile, tablet, and desktop. You can even install it as a PWA for an app-like experience.</div></div>
       <div class="faqitem rv"><div class="faqq"><span class="faqqt">Which exams are covered?</span><span class="faqico">+</span></div><div class="faqa">JEE Mains, JEE Advanced, NEET UG, Class 10 & 12 Boards — across Physics, Chemistry, Maths, Biology, and more.</div></div>
     </div>
@@ -484,7 +533,7 @@ h1 em{font-style:normal;color:var(--accent)}
 </div>
 
 <!-- CTA -->
-<div style="padding:0 clamp(20px,4vw,60px) clamp(64px,8vw,100px);background:var(--bg)">
+<div style="padding:0 clamp(20px,4vw,60px) clamp(64px,8vw,100px);background:var(--bg);position:relative;z-index:1">
   <div class="ctasec rv">
     <div>
       <div class="ctabadge">✦ Join 50K+ Students</div>
@@ -492,7 +541,7 @@ h1 em{font-style:normal;color:var(--accent)}
       <p class="ctadesc">Premium courses from India's best educators. Zero cost. Zero friction. Start right now.</p>
       <div class="ctabtns">
         <a href="#platforms" class="btn-light">Explore Platforms →</a>
-        <a href="https://t.me/shp910b" class="btn-outline-light">Join Telegram</a>
+        <a href="https://t.me/mtaiirus" class="btn-outline-light">Join Telegram</a>
       </div>
     </div>
     <div class="ctaright">
@@ -510,7 +559,7 @@ h1 em{font-style:normal;color:var(--accent)}
   <div class="ftop">
     <div class="fbrand">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <div class="blogo"><img src="https://play-lh.googleusercontent.com/aFux_izD7qhcU2AskjHpzjGvCOQr2Vrn42OEQHF774zJZUycwvfPLanRtck0AQ-sdMpplPFLDmorOm7WOLSW" alt="Mtaiirus" onerror="this.parentElement.innerHTML='<span style=\'font-family:Syne,sans-serif;font-size:19px;font-weight:800;color:var(--accent)\'>M</span>'"></div>
+        <div class="blogo"><img src="https://i.ibb.co/G3TLgSgJ/pngtree-mv-vm-letter-vector-logo-image-332121.jpg" alt="Mtaiirus" onerror="this.parentElement.innerHTML='<span style=\'font-family:Syne,sans-serif;font-size:19px;font-weight:800;color:var(--accent)\'>M</span>'"></div>
         <span class="bname" style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--ink)">MTAI<span style="color:var(--accent)">IRUS</span></span>
       </div>
       <p class="fbrandp">Free access to India's best premium ed-tech courses. Built with love for every student who deserves quality education.</p>
@@ -518,8 +567,8 @@ h1 em{font-style:normal;color:var(--accent)}
     <div class="fcol">
       <h4>Platforms</h4>
       <ul>
-        <li><a href="rgvikramjeet.base44.app">RG Vikramjeet</a></li>
-        <li><a href="https://nt.rarestudy.in/">Next Toppers</a></li>
+        <li><a href="https://rgvikramjeet.base44.app">RG Vikramjeet</a></li>
+        <li><a href="https://nxttoppers.lovable.app/">Next Toppers</a></li>
         <li><a href="https://mission-jeet.lovable.app/">Mission JEET</a></li>
       </ul>
     </div>
@@ -535,8 +584,8 @@ h1 em{font-style:normal;color:var(--accent)}
     <div class="fcol">
       <h4>Community</h4>
       <ul>
-        <li><a href="https://t.me/shp910">Telegram Channel</a></li>
-        <li><a href="https://t.me/shp910">Get Support</a></li>
+        <li><a href="https://t.me/mtaiirus">Telegram Channel</a></li>
+        <li><a href="https://t.me/mtaiirus">Get Support</a></li>
       </ul>
     </div>
     <div class="fcol">
@@ -588,3 +637,4 @@ document.querySelectorAll('.faqq').forEach(q=>{
 </script>
 </body>
 </html>
+  
