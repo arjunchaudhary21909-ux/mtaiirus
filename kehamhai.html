@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Na Kare Janab Na | Lyric Vibe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #1a1e2b 0%, #2a1e3c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, 'Segoe UI', 'Poppins', 'Montserrat', 'Roboto', sans-serif;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* decorative animated background elements */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255,215,150,0.2) 0%, rgba(255,150,100,0) 70%);
+            top: 10%;
+            left: -5%;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: floatGlow 18s infinite alternate ease-in-out;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(200,140,255,0.15) 0%, rgba(100,80,200,0) 70%);
+            bottom: 5%;
+            right: -8%;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: floatGlow 22s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            100% { transform: translate(20px, -20px) scale(1.2); opacity: 0.9; }
+        }
+
+        /* main card container */
+        .lyric-card {
+            background: rgba(22, 18, 35, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 4rem 2.5rem 4rem 2.5rem;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.1);
+            padding: 3rem 2.5rem;
+            max-width: 780px;
+            width: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,210,150,0.3);
+            text-align: center;
+            z-index: 2;
+        }
+
+        /* signature vibe — main text */
+        .magic-line {
+            font-size: clamp(2.8rem, 12vw, 5.8rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #FFF5E6;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 8px rgba(255,215,140,0.7);
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            word-break: keep-all;
+            display: inline-block;
+            background: linear-gradient(135deg, #FFE6C7, #FFB67E);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: none;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        /* elegant subtext with na flavor */
+        .echo-line {
+            font-size: clamp(1.1rem, 4vw, 1.8rem);
+            font-weight: 500;
+            color: #D9C9E8;
+            margin-top: 1rem;
+            letter-spacing: 0.5px;
+            background: rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            padding: 0.4rem 1.6rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            font-family: monospace;
+            border-left: 2px solid #ffb347;
+            border-right: 2px solid #ffb347;
+        }
+
+        /* decorative elements: music & sparks */
+        .ornament {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 2rem 0 1rem;
+            flex-wrap: wrap;
+            opacity: 0.8;
+        }
+
+        .ornament span {
+            font-size: 1.7rem;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+            transition: transform 0.2s ease;
+            display: inline-block;
+            animation: gentleSway 4s infinite alternate;
+        }
+
+        @keyframes gentleSway {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-5px) rotate(2deg); }
+        }
+
+        .ornament span:nth-child(2) { animation-duration: 3.5s; animation-delay: 0.2s; }
+        .ornament span:nth-child(3) { animation-duration: 4.2s; animation-delay: 0.6s; }
+
+        /* rhythm bar */
+        .rhythm-line {
+            margin: 2.2rem auto 1rem;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FFD966, #f4a261, #FFD966, transparent);
+            border-radius: 10px;
+        }
+
+        /* small interactive detail - subtle hover effect on card */
+        .lyric-card:hover {
+            border-color: rgba(255, 190, 90, 0.7);
+            box-shadow: 0 35px 55px rgba(0, 0, 0, 0.5);
+            transform: scale(1.01);
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        /* whisper footer */
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #bbaad0;
+            font-weight: 300;
+            letter-spacing: 0.8px;
+            border-top: 1px dashed rgba(255,200,120,0.4);
+            padding-top: 1.3rem;
+            display: inline-block;
+            width: auto;
+        }
+
+        /* responsive touches */
+        @media (max-width: 550px) {
+            .lyric-card {
+                padding: 2rem 1.5rem;
+                border-radius: 2.5rem 1.8rem 2.5rem 1.8rem;
+            }
+            .ornament span {
+                font-size: 1.3rem;
+            }
+            .echo-line {
+                font-size: 0.9rem;
+                padding: 0.3rem 1.2rem;
+            }
+        }
+
+        /* extra charm: a little pulse on the core text */
+        @keyframes softGlowPulse {
+            0% { text-shadow: 0 0 1px rgba(255,200,100,0.3); }
+            100% { text-shadow: 0 0 12px rgba(255,180,70,0.6); }
+        }
+        .magic-line {
+            animation: softGlowPulse 2.2s infinite alternate;
+        }
+    </style>
+</head>
+<body>
+
+<div class="lyric-card">
+    <!-- top decorative tunes -->
+    <div class="ornament">
+        <span>🎵</span>
+        <span>✨</span>
+        <span>🎶</span>
+        <span>🌙</span>
+        <span>🎤</span>
+    </div>
+
+    <!-- main text: exactly "na kare janab na" -->
+    <div class="magic-line">
+        na kare janab na
+    </div>
+
+    <!-- little echo line for dramatic effect, keeps the vibe without extra text clutter -->
+    <div class="echo-line">
+        •  team mtaiirus •
+    </div>
+
+    <!-- subtle rhythm line as divider -->
+    <div class="rhythm-line"></div>
+
+    <!-- optional tiny hint: pure mood (no extra text changes meaning, just art) -->
+    <div class="footer-note">
+        ❝ mtaiirus.pages.dev ❞
+    </div>
+</div>
+
+<!-- no additional JS needed — pure poetic HTML/CSS -->
+</body>
+</html>
